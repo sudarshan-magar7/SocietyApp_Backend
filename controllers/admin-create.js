@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'thisIsJSONWebTokenKey'
 const adminCreate = async (req, res) => {
     try {
-        const {firstName, lastName, email, password} = req.body;
+        const {firstName, lastName, email, password}     = req.body;
         if (!firstName && !lastName && !email && !password) {
             return res.status(400).send({
                 success: false,
@@ -19,7 +19,7 @@ const adminCreate = async (req, res) => {
         res.status(200).send({
             success: true,
             Token: token,
-            msg: 'User login successful',
+            msg: 'User login successful.',
             user: results[0],
 
         });
@@ -27,7 +27,7 @@ const adminCreate = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             success: false,
-            msg: 'Server Problem.',
+            msg: 'Server Problem,Please Try Again.',
             Error: error
         })
     }
