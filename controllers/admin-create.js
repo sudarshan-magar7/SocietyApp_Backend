@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'thisIsJSONWebTokenKey'
 const adminCreate = async (req, res) => {
     try {
-        const {firstName, lastName, email, password}     = req.body;
+        const { firstName, lastName, email, password } = req.body;
         if (!firstName && !lastName && !email && !password) {
             return res.status(400).send({
                 success: false,
@@ -11,8 +11,18 @@ const adminCreate = async (req, res) => {
 
             })
         }
+        const [find] = await db.query(
+            'SELECT 1 FROM admin WHERE user_id =? LIMIT 1', [email]
+        )
+        if (find) {
+            return res.status(400).send({
+                success: false,
+                msg: 'User All ready Exists.',
+
+            })
+        }
         const [results] = await db.query(
-            'INSERT INTO admin(firstName,lastName,email,password) VALUES(?,?,?,?)', [firstName, lastName, email, password]
+            'INSERT INTO admin(firstName,lastName,email,password,active,user_id) VALUES(?,?,?,?,?,?)', [firstName, lastName, email, password, 1, 1]
         );
 
         const token = jwt.sign({ email }, JWT_SECRET);
