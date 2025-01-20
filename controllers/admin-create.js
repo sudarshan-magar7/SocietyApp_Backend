@@ -28,7 +28,7 @@ const adminCreate = async (req, res) => {
 
         // Insert new user
         const [results] = await db.query(
-            'INSERT INTO admin (firstName, lastName, email, password, active, user_id) VALUES (?, ?, ?, ?, ?, ?)',
+            'INSERT INTO admin (firstName, lastName, email, password, active,super_admin_id) VALUES (?, ?, ?, ?, ?, ?)',
             [firstName, lastName, email, password, 1, 1]
         );
 

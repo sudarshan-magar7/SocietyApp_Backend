@@ -4,6 +4,6 @@ const mySqlPool=mysql.createPool({
     host:'localhost',
     user:'root',
     password:'MyStrongPassword123!',
-    database:'society_app'
+    database:'society_management'
 })
 module.exports=mySqlPool;

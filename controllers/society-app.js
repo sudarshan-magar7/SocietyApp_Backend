@@ -3,20 +3,20 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'thisIsJSONWebTokenKey'
 const SuperAdminLogin = async (req, res) => {
     try {
-        const { user_id, password } = req.body;
+        const { email, password } = req.body;
 
 
-        if (!user_id || !password) {
+        if (!email || !password) {
             return res.status(400).send({
                 success: false,
-                msg: 'Missing user_id or password',
+                msg: ' email or password  are provided',
             });
         }
 
 
         const [results] = await db.query(
-            'SELECT * FROM superadmin WHERE user_id = ? AND password = ?',
-            [user_id, password]
+            'SELECT * FROM superadmin WHERE email = ? AND password = ?',
+            [email, password]
         );
 
 
@@ -27,7 +27,7 @@ const SuperAdminLogin = async (req, res) => {
             });
         }
 
-        const token = jwt.sign({ user_id }, JWT_SECRET);
+        const token = jwt.sign({ email }, JWT_SECRET);
         res.status(200).send({
             success: true,
             Token: token,
