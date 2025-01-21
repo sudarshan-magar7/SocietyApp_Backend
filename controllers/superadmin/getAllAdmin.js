@@ -1,11 +1,13 @@
-const db = require('../config/db');
-const fetchuser=require('../middleware/super-admin-middleware')
+const db = require('../../config/db');
+const fetchuser=require('../../middleware/super-admin-middleware')
 const getAllAdmin=async(req,res)=>{
+    
     try{
         const [allAdmin]=await db.query(
             'SELECT * FROM admin'
             
         )
+        
         res.status(200).send({
             success:true,
             Data:allAdmin,

@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 const adminDisable = async (req, res) => {
     try {
         const { email } = req.body;

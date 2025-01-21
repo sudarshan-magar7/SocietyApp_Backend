@@ -1,12 +1,10 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'thisIsJSONWebTokenKey';
 
 const adminCreate = async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
-
-        // Validate input
         if (!firstName || !lastName || !email || !password) {
             return res.status(400).send({
                 success: false,

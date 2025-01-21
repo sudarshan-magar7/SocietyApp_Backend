@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'thisIsJSONWebTokenKey'
 const SuperAdminLogin = async (req, res) => {

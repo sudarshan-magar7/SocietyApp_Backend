@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET || 'thisIsJSONWebTokenKey'; // Use env variable for secret
@@ -27,6 +27,7 @@ const adminLogin = async (req, res) => {
         }
 
         const user = results[0];
+        
 
         // Compare provided password with the stored hashed password
         const passwordMatches = await(password==user.password);
@@ -39,13 +40,13 @@ const adminLogin = async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ email: user.email}, JWT_SECRET);
+        const token = jwt.sign({ email: user.email,id: user.id}, JWT_SECRET);
 
         // Successful login response
         res.status(200).send({
             success: true,
             msg: 'Admin Login Successfully.',
-            token: token,
+            token:token,
         });
 
     } catch (error) {
